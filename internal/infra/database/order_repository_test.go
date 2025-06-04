@@ -4,12 +4,11 @@ import (
 	"database/sql"
 	"testing"
 
+	"github.com/Natayoane/go-clean-architecture/internal/entity"
 	"github.com/stretchr/testify/suite"
 
 	// sqlite3
 	_ "github.com/mattn/go-sqlite3"
-
-	entity "github.com/Natayoane/go-clean-architecture/internal/entity"
 )
 
 type OrderRepositoryTestSuite struct {

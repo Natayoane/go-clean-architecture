@@ -1,6 +1,6 @@
 package graph
 
-import "github.com/Natayoane/go-clean-architectureh/internal/usecase"
+import "github.com/Natayoane/go-clean-architecture/internal/usecase"
 
 // This file will not be regenerated automatically.
 //

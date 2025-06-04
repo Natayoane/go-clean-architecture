@@ -14,7 +14,7 @@ import (
 	"github.com/Natayoane/go-clean-architecture/internal/infra/grpc/pb"
 	"github.com/Natayoane/go-clean-architecture/internal/infra/grpc/service"
 	"github.com/Natayoane/go-clean-architecture/internal/infra/web/webserver"
-	"github.com/Natayoane/go-clean-architectureh/pkg/events"
+	"github.com/Natayoane/go-clean-architecture/pkg/events"
 	"github.com/streadway/amqp"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/reflection"

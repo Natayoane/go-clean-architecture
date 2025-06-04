@@ -8,12 +8,12 @@ package main
 
 import (
 	"database/sql"
-	"github.com/Natayoane/go-clean-architectureh/internal/entity"
-	"github.com/Natayoane/go-clean-architectureh/internal/event"
-	"github.com/Natayoane/go-clean-architectureh/internal/infra/database"
-	"github.com/Natayoane/go-clean-architectureh/internal/infra/web"
-	"github.com/Natayoane/go-clean-architectureh/internal/usecase"
-	"github.com/Natayoane/go-clean-architectureh/pkg/events"
+	"github.com/Natayoane/go-clean-architecture/internal/entity"
+	"github.com/Natayoane/go-clean-architecture/internal/event"
+	"github.com/Natayoane/go-clean-architecture/internal/infra/database"
+	"github.com/Natayoane/go-clean-architecture/internal/infra/web"
+	"github.com/Natayoane/go-clean-architecture/internal/usecase"
+	"github.com/Natayoane/go-clean-architecture/pkg/events"
 	"github.com/google/wire"
 )
 

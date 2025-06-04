@@ -5,8 +5,8 @@ import (
 	"fmt"
 	"sync"
 
-	events "github.com/Natayoane/go-clean-architecture/pkg/events"
-	amqp "github.com/rabbitmq/amqp091-go"
+	"github.com/Natayoane/go-clean-architecture/pkg/events"
+	"github.com/streadway/amqp"
 )
 
 type OrderCreatedHandler struct {
