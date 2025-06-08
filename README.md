@@ -5,11 +5,11 @@ Desafio Full Cycle: Clean Architecture em Go
 ## Serviços Disponíveis
 
 - **Web API REST**: CRUD de pedidos via HTTP  
-  Porta padrão: **8080**
+  Porta padrão: **8000**
 - **gRPC**: Serviço gRPC para pedidos  
   Porta padrão: **50051**
 - **GraphQL**: Playground e API GraphQL para pedidos  
-  Porta padrão: **8082**
+  Porta padrão: **8080**
 
 ## Como rodar o projeto
 
@@ -19,35 +19,39 @@ Desafio Full Cycle: Clean Architecture em Go
    cd go-clean-architecture
    ```
 
-2. **Configure o banco de dados e RabbitMQ**
-   - O projeto espera um banco MySQL e RabbitMQ rodando (veja `docker-compose.yaml` para subir rapidamente).
-   - Para subir com Docker:
-     ```sh
-     docker-compose up -d
-     ```
-
-3. **Configure as variáveis de ambiente**
-   - Edite o arquivo `.env` ou configure as variáveis conforme o arquivo `configs/config.go`.
-
-4. **Instale as dependências**
+2. **Suba todos os serviços com Docker Compose**
    ```sh
-   go mod tidy
+   docker-compose up --build
+   ```
+   
+   Ou para rodar em background:
+   ```sh
+   docker-compose up --build -d
    ```
 
-5. **Rode a aplicação**
+3. **Verifique se os serviços estão rodando**
    ```sh
-   go run cmd/ordersystem/main.go
+   docker-compose ps
    ```
+
+**Nota**: O Docker Compose já configura automaticamente:
+- Banco de dados MySQL na porta 3306
+- RabbitMQ na porta 5672 (management em 15672)
+- Aplicação Go com todos os serviços (REST, gRPC, GraphQL)
+- Todas as dependências e configurações necessárias
 
 ## Portas dos Serviços
 
 | Serviço   | Porta | Endereço de acesso                        |
 |-----------|-------|-------------------------------------------|
-| Web REST  | 8080  | http://localhost:8080                     |
+| Web REST  | 8000  | http://localhost:8000                     |
 | gRPC      | 50051 | (use Evans)                               |
-| GraphQL   | 8082  | http://localhost:8082/ (playground)       |
+| GraphQL   | 8080  | http://localhost:8080/ (playground)       |
+| MySQL     | 3306  | localhost:3306                            |
+| RabbitMQ  | 5672  | localhost:5672                            |
+| RabbitMQ Management | 15672 | http://localhost:15672 (guest/guest) |
 
-> As portas podem ser alteradas no arquivo de configuração.
+> As portas podem ser alteradas no arquivo `docker-compose.yaml`.
 
 ## Exemplos de uso
 
@@ -55,16 +59,18 @@ Desafio Full Cycle: Clean Architecture em Go
 
 - **Criar pedido**
   ```sh
-  curl -X POST http://localhost:8080/order -d '{"id":"1","price":100,"tax":10}'
+  curl -X POST http://localhost:8000/order \
+    -H "Content-Type: application/json" \
+    -d '{"id":"1","price":100,"tax":10}'
   ```
 - **Listar pedidos**
   ```sh
-  curl http://localhost:8080/order
+  curl http://localhost:8000/order
   ```
 
 ### GraphQL
 
-Acesse o playground em [http://localhost:8082/](http://localhost:8082/)
+Acesse o playground em [http://localhost:8080/](http://localhost:8080/)
 
 - **Query para listar pedidos**
   ```graphql
@@ -98,3 +104,30 @@ Acesse o playground em [http://localhost:8082/](http://localhost:8082/)
     evans -r repl -p 50051
     ```
   - Dentro do Evans, você pode listar os serviços e métodos disponíveis e fazer chamadas interativamente.
+
+## Comandos Úteis do Docker
+
+- **Ver logs da aplicação**
+  ```sh
+  docker-compose logs app
+  ```
+
+- **Ver logs de todos os serviços**
+  ```sh
+  docker-compose logs
+  ```
+
+- **Parar todos os serviços**
+  ```sh
+  docker-compose down
+  ```
+
+- **Recriar e iniciar os serviços**
+  ```sh
+  docker-compose up --build --force-recreate
+  ```
+
+- **Ver status dos containers**
+  ```sh
+  docker-compose ps
+  ```
