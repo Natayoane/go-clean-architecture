@@ -1,4 +1,18 @@
 services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "8000:8000"
+      - "8080:8080"
+      - "50051:50051"
+    env_file:
+      - ./cmd/ordersystem/.env
+    restart: unless-stopped
+    tty: true
+    stdin_open: true
+
   mysql:
     image: mysql:8.0
     platform: linux/arm64/v8
